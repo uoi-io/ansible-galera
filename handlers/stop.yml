@@ -1,0 +1,4 @@
+# file: roles/galera/handlers/stop.yml
+---
+- name: Stop MariaDB
+  service: name=mysql state=stopped

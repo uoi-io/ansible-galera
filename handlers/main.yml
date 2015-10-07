@@ -1,0 +1,5 @@
+# file: roles/galera/handlers/main.yml
+---
+- include: start.yml
+- include: stop.yml
+- include: restart.yml

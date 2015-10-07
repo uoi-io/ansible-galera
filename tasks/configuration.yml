@@ -1,0 +1,19 @@
+# file: roles/galera/tasks/configuration.yml
+---
+- name: Configure MariaDB Galera cluster
+  template: src=etc/mysql/my.cnf.j2 dest=/etc/mysql/my.cnf
+    owner=root
+    group=root
+    mode=0644
+  template: src=etc/mysql/conf.d/galera.cnf.j2 dest=/etc/mysql/conf.d/galera.cnf
+    owner=root
+    group=root
+    mode=0644
+  template: src=etc/mysql/debian.cnf.j2 dest=/etc/mysql/debian.cnf
+    owner=root
+    group=root
+    mode=0600
+
+- name: Delete mariadb.cnf config file
+  file: path=/etc/mysql/conf.d/mariadb.cnf
+    state=absent

@@ -1,0 +1,18 @@
+[mysqld]
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_provider_options="pc.ignore_quorum=true"
+wsrep_cluster_name="{{ galera_cluster_name | default('uoi-sql-cluster') }}"
+wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
+{% if (inventory_hostname == master) %}
+wsrep_cluster_address=gcomm://
+{% else %}
+wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}
+{% endif %}
+wsrep_sst_method={{ galera_sst_method | default('rsync') }}
+wsrep_node_address="{{ ansible_default_ipv4.address }}"
+wsrep_node_name="{{ ansible_hostname }}"
+
+binlog_format=ROW
+innodb_autoinc_lock_mode=2
+innodb_doublewrite=1

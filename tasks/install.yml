@@ -1,0 +1,12 @@
+# file: roles/galera/tasks/install.yml
+---
+- name: Install MariaDB Galera packages
+  apt: pkg="{{ item }}"
+    state=latest
+    update_cache=yes
+  with_items:
+    - mariadb-server
+    - xtrabackup
+    - socat
+    - python-mysqldb
+    - percona-toolkit

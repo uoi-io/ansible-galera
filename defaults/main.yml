@@ -1,0 +1,14 @@
+# file: roles/galera/default/main.yml
+---
+mariadb_bind_address: 0.0.0.0
+mariadb_port: 3306
+mariadb_max_connections: 4096
+mariadb_query_cache_size: 0
+mariadb_default_storage_engine: InnoDB
+mariadb_maintenance_password: I3uL6AqJLHInv85x
+
+galera_cluster_name: uoi-sql-cluster
+galera_sst_method: xtrabackup-v2
+galera_sst_user: sst-replication
+galera_sst_password: gr34tp4ss0rd
+galera_cluster_nodes: [ctrl01, ctrl02, ctrl03]

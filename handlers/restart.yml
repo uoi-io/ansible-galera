@@ -1,0 +1,4 @@
+# file: roles/galera/handlers/restart.yml
+---
+- name: Restart MariaDB
+  service: name=mysql state=restarted

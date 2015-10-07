@@ -1,0 +1,4 @@
+# file: roles/galera/handlers/start.yml
+---
+- name: Start MariaDB
+  service: name=mysql state=started
