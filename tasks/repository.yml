@@ -4,12 +4,12 @@
   apt_repository: repo='deb http://mariadb.mirror.iweb.com/repo/10.1/debian jessie main'
     state=present
     update_cache=true
-  apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
+- apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
     state=present
 
 - name: Install Percona repository
   apt_repository: repo='deb http://repo.percona.com/apt jessie main'
     state=present
     update_cache=true
-  apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
+- apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
     state=present
