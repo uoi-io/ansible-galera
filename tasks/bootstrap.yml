@@ -3,10 +3,12 @@
 - name: Bootstrap the Galera cluster
   service: name=mysql state=restarted
   when: inventory_hostname == master
+  tags: galera-bootstrap
 
 - name: Syncing other nodes to the master
   service: name=mysql state=restarted
   when: inventory_hostname != master
+  tags: galera-bootstrap
 
 - name: Set the correct gcomm:// on the master node
   lineinfile: dest=/etc/mysql/conf.d/galera.cnf
@@ -14,3 +16,4 @@
     regexp='^wsrep_cluster_address='
     line='wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}'
   when: inventory_hostname == master
+  tags: galera-bootstrap

@@ -5,6 +5,7 @@
     name: test
     state: absent
   when: inventory_hostname == master
+  tags: galera-secure
 
 - name: Deny remote root access
   mysql_user:
@@ -15,9 +16,11 @@
     - "127.0.0.1"
     - "::1"
   when: inventory_hostname == master
+  tags: galera-secure
 
 - name: Deny anonymous access
   mysql_user:
     name: ""
     state: absent
   when: inventory_hostname == master
+  tags: galera-secure

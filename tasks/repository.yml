@@ -6,6 +6,7 @@
     update_cache=true
 - apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
     state=present
+  tags: galera-mariadb-repo
 
 - name: Install Percona repository
   apt_repository: repo='deb http://repo.percona.com/apt jessie main'
@@ -13,3 +14,4 @@
     update_cache=true
 - apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
     state=present
+  tags: galera-percona-repo

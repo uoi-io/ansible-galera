@@ -6,6 +6,7 @@
     group=root
     state=link
     force=yes
+  tags: galera-config
 
 - name: Set root password for localhost
   mysql_user:
@@ -14,6 +15,7 @@
     host=localhost
     state=present
   when: inventory_hostname == master
+  tags: galera-config
 
 - name: Set debian-sys-maint password for localhost
   mysql_user:
@@ -22,35 +24,42 @@
     host=localhost
     state=present
   when: inventory_hostname == master
+  tags: galera-config
 
 - name: Removing old /root/.my.cnf file
   file: path=/root/.my.cnf
     state=absent
+  tags: galera-config
 
 - name: Creating the final /root/.my.cnf file
   template: src=root/my.cnf.j2 dest=/root/.my.cnf
     owner=root
     group=root
     mode=0640
+  tags: galera-config
 
 - name: Configuring Galera cluster (1/3)
   template: src=etc/mysql/my.cnf.j2 dest=/etc/mysql/my.cnf
     owner=root
     group=root
     mode=0644
+  tags: galera-config
 
 - name: Configuring Galera cluster (2/3)
   template: src=etc/mysql/conf.d/galera.cnf.j2 dest=/etc/mysql/conf.d/galera.cnf
     owner=root
     group=root
     mode=0644
+  tags: galera-config
 
 - name: Configuring Galera cluster (3/3)
   template: src=etc/mysql/debian.cnf.j2 dest=/etc/mysql/debian.cnf
     owner=root
     group=root
     mode=0600
+  tags: galera-config
 
 - name: Delete mariadb.cnf config file
   file: path=/etc/mysql/conf.d/mariadb.cnf
     state=absent
+  tags: galera-config

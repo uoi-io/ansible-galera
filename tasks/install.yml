@@ -10,3 +10,4 @@
     - socat
     - python-mysqldb
     - percona-toolkit
+  tags: galera-install
