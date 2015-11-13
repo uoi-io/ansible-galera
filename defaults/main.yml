@@ -6,6 +6,7 @@ mariadb_max_connections: 4096
 mariadb_query_cache_size: 0
 mariadb_default_storage_engine: InnoDB
 mariadb_maintenance_password: I3uL6AqJLHInv85x
+mariadb_root_password: 3248ew7dsYUG762
 
 galera_cluster_name: uoi-sql-cluster
 galera_sst_method: xtrabackup-v2

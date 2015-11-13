@@ -1,9 +1,9 @@
-# file: roles/galera/tasks/users.yml
 ---
+# file: roles/galera/tasks/users.yml
 - name: Create the SST replication user
   mysql_user:
     name={{ galera_sst_user }}
     password={{ galera_sst_password }}
     priv=*.*:ALL,GRANT
     state=present
-  when: inventory_hostname == "{{ master }}"
+  when: inventory_hostname == master

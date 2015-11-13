@@ -1,7 +1,8 @@
-# file: roles/galera/tasks/main.yml
 ---
+# file: roles/galera/tasks/main.yml
 - include: repository.yml
 - include: install.yml
 - include: configuration.yml
+- include: secure.yml
 - include: user.yml
 - include: bootstrap.yml

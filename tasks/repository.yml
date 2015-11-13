@@ -1,5 +1,5 @@
-# file: roles/galera/tasks/repository.yml
 ---
+# file: roles/galera/tasks/repository.yml
 - name: Install MariaDB Galera repository
   apt_repository: repo='deb http://mariadb.mirror.iweb.com/repo/10.1/debian jessie main'
     state=present
