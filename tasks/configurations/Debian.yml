@@ -1,7 +1,7 @@
 ---
 # file: roles/galera/tasks/configurations/Debian.yml
 - name: Configuring root access for Ansible (Debian)
-  file: src={{ ansible_files_dir }}/etc/mysql/debian.cnf dest=/root/.my.cnf
+  file: src=/etc/mysql/debian.cnf dest=/root/.my.cnf
     owner=root
     group=root
     state=link
