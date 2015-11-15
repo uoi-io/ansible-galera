@@ -9,7 +9,7 @@
 - include: install.yml
 
 - include: firewall.yml
-  when: galera_firewalld == true
+  when: galera_firewalld is defined and galera_firewalld == true
 
 - include: config.yml
 - include: secure.yml
