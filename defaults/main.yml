@@ -7,7 +7,12 @@ mariadb_query_cache_size: 0
 mariadb_default_storage_engine: InnoDB
 mariadb_maintenance_password: I3uL6AqJLHInv85x
 mariadb_root_password: 3248ew7dsYUG762
+mariadb_hosts_allow: 192.168.%
+mariadb_datadir: /var/lib/mysql
 
+#galera_reset_cluster: true
+galera_selinux: true
+galera_firewalld: true
 galera_cluster_name: uoi-sql-cluster
 galera_sst_method: xtrabackup-v2
 galera_sst_user: sst-replication

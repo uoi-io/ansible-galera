@@ -1,0 +1,13 @@
+---
+# file: roles/galera/vars/main.yml
+# These variables are a fix to this bug: https://github.com/ansible/ansible/issues/10907
+# Because we have subdirectory in tasks directory when we want to source a file
+# from files/ or templates the directory is not valid.
+ansible_files_dir: ../../files
+ansible_templates_dir: ../../templates
+
+# FIREWALL PORTS
+fw_mysql: "{{ mariadb_port }}/tcp"
+fw_mysql_ist: 4568/tcp
+fw_mysql_sst: 4444/tcp
+fw_galera: 4567/tcp

@@ -1,13 +1,21 @@
 ---
 # file: roles/galera/tasks/install.yml
-- name: Installing MariaDB Galera packages
+- name: Installing MariaDB Galera packages (Debian)
   apt: name="{{ item }}"
     state=latest
     update_cache=yes
-  with_items:
-    - mariadb-server
-    - xtrabackup
-    - socat
-    - python-mysqldb
-    - percona-toolkit
+  with_items: "{{ galera_packages }}"
+  when: ansible_distribution == 'Debian'
+  tags: galera-install
+
+- name: Installing MariaDB Galera packages (CentOS)
+  yum: name="{{ item }}"
+    state=latest
+    update_cache=yes
+  with_items: "{{ galera_packages }}"
+  when: ansible_distribution == 'CentOS'
+  tags: galera-install
+
+- name: Enable MariaDB service
+  service: name={{ mariadb_svc_name }} enabled=yes
   tags: galera-install

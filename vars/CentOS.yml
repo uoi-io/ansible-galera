@@ -1,0 +1,14 @@
+---
+# file: roles/galera/vars/CentOS.yml
+galera_packages:
+  - mariadb-server
+  - percona-xtrabackup
+  - socat
+  - MySQL-python
+  - percona-toolkit
+  - galera
+  - policycoreutils-python
+  - checkpolicy
+mariadb_svc_name: mariadb
+mariadb_config: my.cnf.d/server.cnf
+galera_provider: /usr/lib64/galera/libgalera_smm.so

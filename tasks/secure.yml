@@ -1,13 +1,13 @@
 ---
 # file: roles/galera/tasks/secure.yml
-- name: Removing test database
+- name: Removing test default database
   mysql_db:
     name: test
     state: absent
   when: inventory_hostname == master
   tags: galera-secure
 
-- name: Deny remote root access
+- name: Disabling remote access for root
   mysql_user:
     name: root
     host: "{{ item }}"
@@ -18,7 +18,7 @@
   when: inventory_hostname == master
   tags: galera-secure
 
-- name: Deny anonymous access
+- name: Disabling anonymous access
   mysql_user:
     name: ""
     state: absent

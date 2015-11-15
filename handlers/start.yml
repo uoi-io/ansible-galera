@@ -1,4 +1,4 @@
 # file: roles/galera/handlers/start.yml
 ---
 - name: Start MariaDB
-  service: name=mysql state=started
+  service: name={{ mariadb_svc_name }} state=started
