@@ -10,7 +10,7 @@ mariadb_root_password: 3248ew7dsYUG762
 mariadb_hosts_allow: 192.168.%
 mariadb_datadir: /var/lib/mysql
 
-#galera_reset_cluster: true
+galera_reset_cluster: false
 galera_selinux: true
 galera_firewalld: true
 galera_cluster_name: uoi-sql-cluster

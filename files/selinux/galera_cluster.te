@@ -11,6 +11,7 @@ require {
 	class file read;
 	class file open;
 	class unix_stream_socket connectto;
+	class file getattr;
 }
 
 #============= mysqld_t ==============
@@ -31,3 +32,5 @@ allow mysqld_t sysctl_net_t:file open;
 
 #!!!! This avc can be allowed using the boolean 'daemons_enable_cluster_mode'
 allow mysqld_t self:unix_stream_socket connectto;
+
+allow mysqld_t sysctl_net_t:file getattr;
