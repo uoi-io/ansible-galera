@@ -1,31 +1,43 @@
 ---
 # file: roles/galera/tasks/firewall.yml
 - name: MySQL/MariaDB firewalld rule
-  firewalld: port={{ fw_mysql }}
+  firewalld:
+    port={{ fw_mysql }}
     permanent=true
     state=enabled
     immediate=true
-  tags: galera-firewall
+  tags:
+    - galera
+    - galera-firewall
 
 - name: IST replication firewalld rule
-  firewalld: port={{ fw_mysql_ist }}
+  firewalld:
+    port={{ fw_mysql_ist }}
     permanent=true
     state=enabled
     immediate=true
-  when: galera_sst_method is not defined
-  tags: galera-firewall
+  when: not galera_sst_method
+  tags:
+    - galera
+    - galera-firewall
 
 - name: SST replication firewalld rule
-  firewalld: port={{ fw_mysql_sst }}
+  firewalld:
+    port={{ fw_mysql_sst }}
     permanent=true
     state=enabled
     immediate=true
-  when: galera_sst_method is defined
-  tags: galera-firewall
+  when: galera_sst_method
+  tags:
+    - galera
+    - galera-firewall
 
 - name: Galera firewalld rule
-  firewalld: port={{ fw_galera }}
+  firewalld:
+    port={{ fw_galera }}
     permanent=true
     state=enabled
     immediate=true
-  tags: galera-firewall
+  tags:
+    - galera
+    - galera-firewall

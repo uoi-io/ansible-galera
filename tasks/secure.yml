@@ -5,22 +5,28 @@
     name: test
     state: absent
   when: inventory_hostname == master
-  tags: galera-secure
+  tags:
+    - galera
+    - galera-secure
 
 - name: Disabling remote access for root
   mysql_user:
     name: root
     host: "{{ item }}"
   with_items:
-    - "localhost"
-    - "127.0.0.1"
-    - "::1"
+    - 'localhost'
+    - '127.0.0.1'
+    - '::1'
   when: inventory_hostname == master
-  tags: galera-secure
+  tags:
+    - galera
+    - galera-secure
 
 - name: Disabling anonymous access
   mysql_user:
     name: ""
     state: absent
   when: inventory_hostname == master
-  tags: galera-secure
+  tags:
+    - galera
+    - galera-secure

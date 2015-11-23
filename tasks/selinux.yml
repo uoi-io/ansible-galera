@@ -1,18 +1,28 @@
 ---
 # file: roles/galera/tasks/selinux.yml
 - name: Building and installing SELinux module
-  copy: src=selinux/galera_cluster.te dest=/tmp/
+  copy:
+    src=selinux/galera_cluster.te
+    dest=/tmp/
   when: ansible_distribution == 'CentOS'
-  tags: galera-selinux
+  tags:
+    - galera
+    - galera-selinux
 
 - command: /usr/bin/checkmodule -M -m -o galera_cluster.mod /tmp/galera_cluster.te
   when: ansible_distribution == 'CentOS'
-  tags: galera-selinux
+  tags:
+    - galera
+    - galera-selinux
 
 - command: /usr/bin/semodule_package -m galera_cluster.mod -o /tmp/galera_cluster.pp
   when: ansible_distribution == 'CentOS'
-  tags: galera-selinux
+  tags:
+    - galera
+    - galera-selinux
 
 - command: /usr/sbin/semodule -i /tmp/galera_cluster.pp
   when: ansible_distribution == 'CentOS'
-  tags: galera-selinux
+  tags:
+    - galera
+    - galera-selinux

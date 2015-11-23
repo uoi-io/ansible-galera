@@ -1,21 +1,31 @@
 ---
 # file: roles/galera/tasks/install.yml
 - name: Installing MariaDB Galera packages (Debian)
-  apt: name="{{ item }}"
+  apt:
+    name="{{ item }}"
     state=latest
     update_cache=yes
   with_items: "{{ galera_packages }}"
   when: ansible_distribution == 'Debian'
-  tags: galera-install
+  tags:
+    - galera
+    - galera-install
 
 - name: Installing MariaDB Galera packages (CentOS)
-  yum: name="{{ item }}"
+  yum:
+    name="{{ item }}"
     state=latest
     update_cache=yes
   with_items: "{{ galera_packages }}"
   when: ansible_distribution == 'CentOS'
-  tags: galera-install
+  tags:
+    - galera
+    - galera-install
 
 - name: Enable MariaDB service
-  service: name={{ mariadb_svc_name }} enabled=yes
-  tags: galera-install
+  service:
+    name={{ mariadb_svc_name }}
+    enabled=yes
+  tags:
+    - galera
+    - galera-install

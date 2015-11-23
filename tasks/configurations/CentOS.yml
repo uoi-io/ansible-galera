@@ -12,13 +12,17 @@
   when: inventory_hostname == master
 
 - name: Creating the /root/.my.cnf file (CentOS)
-  template: src={{ ansible_templates_dir }}/root/my.cnf.centos.j2 dest=/root/.my.cnf
+  template:
+    src={{ ansible_templates_dir }}/root/my.cnf.centos.j2
+    dest=/root/.my.cnf
     owner=root
     group=root
     mode=0640
 
 - name: Configuring Galera cluster (CentOS)
-  template: src={{ ansible_templates_dir }}/etc/my.cnf.d/server.cnf.j2 dest=/etc/my.cnf.d/server.cnf
+  template:
+    src={{ ansible_templates_dir }}/etc/my.cnf.d/server.cnf.j2
+    dest=/etc/my.cnf.d/server.cnf
     owner=root
     group=root
     mode=0644

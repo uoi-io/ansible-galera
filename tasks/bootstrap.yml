@@ -1,19 +1,30 @@
 ---
 # file: roles/galera/tasks/bootstrap.yml
 - name: Bootstrap the Galera cluster
-  service: name={{ mariadb_svc_name }} state=restarted
+  service:
+    name={{ mariadb_svc_name }}
+    state=restarted
   when: inventory_hostname == master
-  tags: galera-bootstrap
+  tags:
+    - galera
+    - galera-bootstrap
 
 - name: Syncing other nodes to the master
-  service: name={{ mariadb_svc_name }} state=restarted
+  service:
+    name={{ mariadb_svc_name }}
+    state=restarted
   when: inventory_hostname != master
-  tags: galera-bootstrap
+  tags:
+    - galera
+    - galera-bootstrap
 
 - name: Set the correct gcomm:// on the master node
-  lineinfile: dest=/etc/{{ mariadb_config }}
+  lineinfile:
+    dest=/etc/{{ mariadb_config }}
     state=present
     regexp='^wsrep_cluster_address='
     line='wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}'
   when: inventory_hostname == master
-  tags: galera-bootstrap
+  tags:
+    - galera
+    - galera-bootstrap

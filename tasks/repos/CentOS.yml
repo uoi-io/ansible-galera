@@ -1,18 +1,23 @@
 ---
 # file: roles/galera/tasks/repos/CentOS.yml
 - name: Install MariaDB Galera repository (CentOS)
-  copy: src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB.repo dest=/etc/yum.repos.d/
+  copy:
+    src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB.repo
+    dest=/etc/yum.repos.d/
     owner=root
     group=root
     mode=0644
-- rpm_key: key=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+- rpm_key:
+    key=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
     state=present
 
 - name: Install Percona repository (CentOS)
-  yum: name="{{ item }}"
+  yum:
+    name="{{ item }}"
     state=present
     update_cache=true
   with_items:
     - https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-3.noarch.rpm
-- rpm_key: key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
+- rpm_key:
+    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
     state=present

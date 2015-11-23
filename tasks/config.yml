@@ -2,8 +2,12 @@
 # file: roles/galera/tasks/config.yml
 - include: configurations/Debian.yml
   when: ansible_distribution == 'Debian'
-  tags: galera-config
+  tags:
+    - galera
+    - galera-config
 
 - include: configurations/CentOS.yml
   when: ansible_distribution == 'CentOS'
-  tags: galera-config
+  tags:
+    - galera
+    - galera-config

@@ -3,13 +3,13 @@
 - include_vars: "{{ ansible_distribution }}.yml"
 
 - include: reset.yml
-  when: galera_reset_cluster is defined and galera_reset_cluster == true
+  when: galera_reset_cluster and galera_reset_cluster == true
 
 - include: repos.yml
 - include: install.yml
 
 - include: firewall.yml
-  when: galera_firewalld is defined and galera_firewalld == true
+  when: galera_firewalld and galera_firewalld == true
 
 - include: config.yml
 - include: secure.yml
