@@ -1,6 +1,17 @@
 ---
 # file: roles/galera/tasks/main.yml
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags:
+    - galera
+    - galera-bootstrap
+    - galera-config 
+    - galera-firewall
+    - galera-repo
+    - galera-reset
+    - galera-secure
+    - galera-selinux
+    - galera-users
+    - galera-install
 
 - include: reset.yml
   when: galera_reset_cluster and galera_reset_cluster == true
