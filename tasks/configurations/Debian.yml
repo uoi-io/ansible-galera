@@ -1,5 +1,11 @@
 ---
 # file: roles/galera/tasks/configurations/Debian.yml
+- name: Start MariaDB service (Debian)
+  service:
+    name={{ mariadb_svc_name }}
+    state=started
+  when: inventory_hostname == master
+
 - name: Configuring root access for Ansible (Debian)
   file:
     src=/etc/mysql/debian.cnf

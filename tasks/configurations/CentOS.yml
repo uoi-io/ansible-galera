@@ -3,6 +3,12 @@
 - include: ../selinux.yml
   when: galera_selinux == true
 
+- name: Start MariaDB service (CentOS)
+  service:
+    name={{ mariadb_svc_name }}
+    state=started
+  when: inventory_hostname == master
+
 - name: Set root password for localhost (CentOS)
   mysql_user:
     name=root
