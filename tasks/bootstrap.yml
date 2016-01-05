@@ -18,7 +18,7 @@
     - galera
     - galera-bootstrap
 
-- name: Set the correct gcomm:// on the master node
+- name: Set gcomm:// on the master node
   lineinfile:
     dest=/etc/{{ mariadb_config }}
     state=present
