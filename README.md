@@ -39,6 +39,10 @@ galera_cluster_nodes:
   - ctrl01
   - ctrl02
   - ctrl03
+  - ctrl03
+galera_provider_options: 'pc.ignore_quorum=true; gcache.size=1G'
+galera_retry_autocommit: 10
+galera_slave_threads: 8
 ```
 ### VARIABLES
 Because the module support RedHat and Debian distributions like, we have to define some values depending of the family.
