@@ -1,4 +1,4 @@
-# Ansible Galera
+# Ansible Galera (OpenStack ready)
 This module provides a support for the installation of Galera cluster.
 
 Two repositories will be added to the packaging system:
