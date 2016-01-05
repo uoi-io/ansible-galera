@@ -1,8 +1,8 @@
 [mysqld]
 wsrep_on=ON
 wsrep_provider={{ galera_provider }}
-wsrep_provider_options="pc.ignore_quorum=true"
-wsrep_cluster_name="{{ galera_cluster_name | default('uoi-sql-cluster') }}"
+wsrep_provider_options={{ galera_provider_options | default('pc.ignore_quorum=true') }}
+wsrep_cluster_name={{ galera_cluster_name | default('uoi-sql-cluster') }}
 wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
 {% if (inventory_hostname == master) %}
 wsrep_cluster_address=gcomm://
@@ -12,6 +12,8 @@ wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}
 wsrep_sst_method={{ galera_sst_method | default('rsync') }}
 wsrep_node_address="{{ ansible_default_ipv4.address }}"
 wsrep_node_name="{{ ansible_hostname }}"
+wsrep_retry_autocommit={{ galera_retry_autocommit | default('10') }}
+wsrep_slave_threads={{ galera_slave_threads | default('8') }}
 
 binlog_format=ROW
 innodb_autoinc_lock_mode=2
