@@ -1,7 +1,7 @@
 ---
 # file: roles/galera/vars/CentOS.yml
 galera_packages:
-  - mariadb-server
+  - MariaDB-server
   - percona-xtrabackup
   - socat
   - MySQL-python

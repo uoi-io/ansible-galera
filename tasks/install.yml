@@ -1,32 +1,32 @@
 ---
 # file: roles/galera/tasks/install.yml
-- name: Installing MariaDB Galera packages (Debian)
+- name: Installing MariaDB Galera packages (Debian family)
   apt:
     name="{{ item }}"
     state=latest
     update_cache=yes
   with_items: "{{ galera_packages }}"
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
   tags:
     - galera
     - galera-install
 
-- name: Remove mariadb-libs packages already installed (CentOS)
+- name: Remove mariadb-libs packages already installed (RedHat family)
   yum:
     name=mariadb-libs
     state=absent
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-install
 
-- name: Installing MariaDB Galera packages (CentOS)
+- name: Installing MariaDB Galera packages (RedHat family)
   yum:
     name="{{ item }}"
     state=latest
     update_cache=yes
   with_items: "{{ galera_packages }}"
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-install

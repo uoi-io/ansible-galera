@@ -1,8 +1,8 @@
 ---
-# file: roles/galera/tasks/repos/CentOS.yml
-- name: Install MariaDB Galera repository (CentOS)
+# file: roles/galera/tasks/repos/RedHat.yml
+- name: Install MariaDB Galera repository (RedHat)
   copy:
-    src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB-centos.repo
+    src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB-rhel.repo
     dest=/etc/yum.repos.d/
     owner=root
     group=root
@@ -11,13 +11,21 @@
     key=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
     state=present
 
-- name: Install Percona repository (CentOS)
+- name: Install Percona repository (RedHat)
   yum:
     name="{{ item }}"
     state=present
-    update_cache=true
   with_items:
     - https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-3.noarch.rpm
 - rpm_key:
     key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
     state=present
+
+- name: Install yum-utils package (RedHat)
+  yum:
+    name=yum-utils
+    state=latest
+
+- name: Enable extras repository (RedHat)
+  command:
+    yum-config-manager --enable rhel-7-server-extras-rpms

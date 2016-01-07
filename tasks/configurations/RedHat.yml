@@ -3,13 +3,13 @@
 - include: ../selinux.yml
   when: galera_selinux == true
 
-- name: Start MariaDB service (CentOS)
+- name: Start MariaDB service (RedHat family)
   service:
     name={{ mariadb_svc_name }}
     state=started
   when: inventory_hostname == master
 
-- name: Set root password for localhost (CentOS)
+- name: Set root password for localhost (RedHat family)
   mysql_user:
     name=root
     password={{ mariadb_root_password }}
@@ -17,7 +17,7 @@
     state=present
   when: inventory_hostname == master
 
-- name: Creating the /root/.my.cnf file (CentOS)
+- name: Creating the /root/.my.cnf file (RedHat family)
   template:
     src={{ ansible_templates_dir }}/root/my.cnf.centos.j2
     dest=/root/.my.cnf
@@ -25,7 +25,7 @@
     group=root
     mode=0640
 
-- name: Configuring Galera cluster (CentOS)
+- name: Configuring Galera cluster (RedHat family)
   template:
     src={{ ansible_templates_dir }}/etc/my.cnf.d/server.cnf.j2
     dest=/etc/my.cnf.d/server.cnf

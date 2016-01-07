@@ -6,8 +6,9 @@ Two repositories will be added to the packaging system:
 - Percona (xtrabackup)
 
 Supported distributions:
-- Centos 7
-- Debian 8
+- CentOS 7.x
+- RedHat EL 7.x
+- Debian 8.x
 
 Supported functionalities:
 - Firewalld (iptables)

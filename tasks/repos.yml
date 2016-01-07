@@ -11,3 +11,9 @@
   tags:
     - galera
     - galera-repo
+
+- include: repos/RedHat.yml
+  when: ansible_distribution == 'RedHat'
+  tags:
+    - galera
+    - galera-repo

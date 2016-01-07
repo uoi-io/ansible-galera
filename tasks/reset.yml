@@ -19,7 +19,7 @@
 
 - name: Rebuilding MariaDB data
   command: /usr/bin/mysql_install_db
-  when: master and ansible_distribution == 'CentOS'
+  when: master and ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-reset
@@ -30,14 +30,14 @@
     owner=mysql
     group=mysql
     recurse=yes
-  when: master and ansible_distribution == 'CentOS'
+  when: master and ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-reset
 
 - name: Relabeling MariaDB data directory
   command: /usr/sbin/restorecon -R {{ mariadb_datadir }}
-  when: ansible_distribution == 'CentOS'
+  when: ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-reset

@@ -1,13 +1,13 @@
 ---
 # file: roles/galera/tasks/config.yml
 - include: configurations/Debian.yml
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
   tags:
     - galera
     - galera-config
 
-- include: configurations/CentOS.yml
-  when: ansible_distribution == 'CentOS'
+- include: configurations/RedHat.yml
+  when: ansible_os_family == 'RedHat'
   tags:
     - galera
     - galera-config

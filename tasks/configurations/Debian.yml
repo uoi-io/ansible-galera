@@ -1,12 +1,12 @@
 ---
 # file: roles/galera/tasks/configurations/Debian.yml
-- name: Start MariaDB service (Debian)
+- name: Start MariaDB service (Debian family)
   service:
     name={{ mariadb_svc_name }}
     state=started
   when: inventory_hostname == master
 
-- name: Configuring root access for Ansible (Debian)
+- name: Configuring root access for Ansible (Debian family)
   file:
     src=/etc/mysql/debian.cnf
     dest=/root/.my.cnf
@@ -15,7 +15,7 @@
     state=link
     force=yes
 
-- name: Set root password for localhost (Debian)
+- name: Set root password for localhost (Debian family)
   mysql_user:
     name=root
     password={{ mariadb_root_password }}
@@ -23,7 +23,7 @@
     state=present
   when: inventory_hostname == master
 
-- name: Set debian-sys-maint password for localhost (Debian)
+- name: Set debian-sys-maint password for localhost (Debian family)
   mysql_user:
     name=debian-sys-maint
     password={{ mariadb_maintenance_password }}
@@ -31,12 +31,12 @@
     state=present
   when: inventory_hostname == master
 
-- name: Removing old /root/.my.cnf file (Debian)
+- name: Removing old /root/.my.cnf file (Debian family)
   file:
     path=/root/.my.cnf
     state=absent
 
-- name: Creating the final /root/.my.cnf file (Debian)
+- name: Creating the final /root/.my.cnf file (Debian family)
   template:
     src={{ ansible_templates_dir }}/root/my.cnf.debian.j2
     dest=/root/.my.cnf
@@ -44,7 +44,7 @@
     group=root
     mode=0640
 
-- name: Configuring Galera cluster (1/3) (Debian)
+- name: Configuring Galera cluster (1/3) (Debian family)
   template:
     src={{ ansible_templates_dir }}/etc/mysql/my.cnf.j2
     dest=/etc/mysql/my.cnf
@@ -52,7 +52,7 @@
     group=root
     mode=0644
 
-- name: Configuring Galera cluster (2/3) (Debian)
+- name: Configuring Galera cluster (2/3) (Debian family)
   template:
     src={{ ansible_templates_dir }}/etc/mysql/conf.d/galera.cnf.j2
     dest=/etc/mysql/conf.d/galera.cnf
@@ -60,7 +60,7 @@
     group=root
     mode=0644
 
-- name: Configuring Galera cluster (3/3) (Debian)
+- name: Configuring Galera cluster (3/3) (Debian family)
   template:
     src={{ ansible_templates_dir }}/etc/mysql/debian.cnf.j2
     dest=/etc/mysql/debian.cnf
@@ -68,7 +68,7 @@
     group=root
     mode=0600
 
-- name: Delete mariadb.cnf config file (Debian)
+- name: Delete mariadb.cnf config file (Debian family)
   file:
     path=/etc/mysql/conf.d/mariadb.cnf
     state=absent
