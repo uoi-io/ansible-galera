@@ -9,6 +9,7 @@ galera_packages:
   - galera
   - policycoreutils-python
   - checkpolicy
+  - xinetd
 mariadb_svc_name: mariadb
 mariadb_config: my.cnf.d/server.cnf
 galera_provider: /usr/lib64/galera/libgalera_smm.so

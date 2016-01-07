@@ -12,6 +12,7 @@
     - galera-selinux
     - galera-users
     - galera-install
+    - galera-pacemaker
 
 - include: reset.yml
   when: galera_reset_cluster and galera_reset_cluster == true
@@ -26,3 +27,6 @@
 - include: secure.yml
 - include: user.yml
 - include: bootstrap.yml
+
+- include: pacemaker.yml
+  when: galera_pacemaker_support and galera_pacemaker_support == true

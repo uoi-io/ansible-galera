@@ -1,0 +1,62 @@
+---
+# file: roles/galera/tasks/pacemaker.yml
+- name: Create the clustercheck user (ready for Pacemaker)
+  mysql_user:
+    name={{ galera_clustercheck_user }}
+    password={{ galera_clustercheck_password }}
+    priv=*.*:USAGE
+    state=present
+  when: inventory_hostname == master
+  tags:
+    - galera
+    - galera-pacemaker
+
+- name: Create the /etc/sysconfig/clustercheck file (ready for Pacemaker)
+  template:
+    src=etc/sysconfig/clustercheck.j2
+    dest=/etc/sysconfig/clustercheck
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - galera
+    - galera-pacemaker
+
+- name: Create the /usr/bin/clustercheck file (ready for Pacemaker)
+  copy:
+    src=usr/bin/clustercheck
+    dest=/usr/bin/clustercheck
+    owner=root
+    group=root
+    mode=0755
+  tags:
+    - galera
+    - galera-pacemaker
+
+- name: Create the /etc/xinet.d/galera-stream file (ready for Pacemaker)
+  template:
+    src=etc/xinetd.d/galera-stream.j2
+    dest=/etc/xinetd.d/galera-stream
+    owner=root
+    group=root
+    mode=0600
+  tags:
+    - galera
+    - galera-pacemaker
+
+- name: Restart xinetd service (ready for Pacemaker)
+  service:
+    name=xinetd
+    state=restarted
+    enabled=yes
+  tags:
+    - galera
+    - galera-pacemaker
+
+- name: Stopping MariaDB service (ready for Pacemaker)
+  service:
+    name={{ mariadb_svc_name }}
+    state=stopped
+  tags:
+    - galera
+    - galera-pacemaker

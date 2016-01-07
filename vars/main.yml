@@ -11,3 +11,5 @@ fw_mysql: "{{ mariadb_port }}/tcp"
 fw_mysql_ist: 4568/tcp
 fw_mysql_sst: 4444/tcp
 fw_galera: 4567/tcp
+
+galera_xinet_port: 9200

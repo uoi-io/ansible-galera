@@ -1,0 +1,20 @@
+# This is the configuration for the tcp/stream galera service.
+ 
+service galera
+{
+        port            = {{ galera_xinet_port }}
+        disable         = no
+        id              = galera-stream
+        socket_type     = stream
+        protocol        = tcp
+        wait            = no
+        user            = root
+        group           = root
+        groups          = yes
+        server          = /usr/bin/clustercheck
+        type            = UNLISTED
+        per_source      = UNLIMITED
+        log_on_success += 
+        log_on_failure += HOST
+        flags           = REUSE
+}
