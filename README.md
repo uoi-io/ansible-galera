@@ -60,10 +60,10 @@ galera_slave_threads: 8
 ### VARIABLES
 Because the module support RedHat and Debian distributions like, we have to define some values depending of the family.
 ```
-### CENTOS
-# file: roles/galera/vars/CentOS.yml
+### REDHAT
+# file: roles/galera/vars/RedHat.yml
 galera_packages:
-  - mariadb-server
+  - MariaDB-server
   - percona-xtrabackup
   - socat
   - MySQL-python
