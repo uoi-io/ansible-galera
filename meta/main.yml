@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Gaetan Trellu (goldyfruit)
-  description: Install MariaDB Galera cluster
+  description: Depoly a Galera 3 cluster with MariaDB 10.1, supports SELinux and firewalld
   company: InCloudUs
   license: license (Apache)
   min_ansible_version: 1.9
@@ -9,10 +9,6 @@ galaxy_info:
   - name: EL
     versions:
     - 7
-  - name: Ubuntu
-    versions:
-    - utopic
-    - vivid
   - name: Debian
     versions:
     - jessie
@@ -21,6 +17,5 @@ galaxy_info:
   - clustering
   - database
   - database:sql
-  - system
   - web
 dependencies: []
