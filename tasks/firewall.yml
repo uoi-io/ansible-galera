@@ -41,3 +41,14 @@
   tags:
     - galera
     - galera-firewall
+
+- name: xinetd firewalld rule
+  firewalld:
+    port={{ fw_xinetd }}
+    permanent=true
+    state=enabled
+    immediate=true
+  when: galera_pacemaker_support is defined and galera_pacemaker_support == true
+  tags:
+    - galera
+    - galera-firewall
