@@ -1,10 +1,10 @@
 ---
 galaxy_info:
   author: Gaetan Trellu (goldyfruit)
-  description: Depoly a Galera 3 cluster with MariaDB 10.1, supports SELinux and firewalld
+  description: Depoly a Galera 3 cluster with MariaDB 10.1, supports SELinux, firewalld, Pacemaker
   company: InCloudUs
   license: license (Apache)
-  min_ansible_version: 1.9
+  min_ansible_version: 2.0
   platforms:
   - name: EL
     versions:
