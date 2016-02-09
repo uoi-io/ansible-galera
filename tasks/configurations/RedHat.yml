@@ -1,7 +1,7 @@
 ---
 # file: roles/galera/tasks/configurations/CentOS.yml
 - include: ../selinux.yml
-  when: galera_selinux == true
+  when: galera_selinux is defined and galera_selinux == true
 
 - name: Start MariaDB service (RedHat family)
   service:
