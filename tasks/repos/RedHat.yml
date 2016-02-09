@@ -2,7 +2,7 @@
 # file: roles/galera/tasks/repos/RedHat.yml
 - name: Install MariaDB Galera repository (RedHat)
   copy:
-    src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB-rhel.repo
+    src=etc/yum.repos.d/MariaDB-rhel.repo
     dest=/etc/yum.repos.d/
     owner=root
     group=root

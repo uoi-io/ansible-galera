@@ -2,7 +2,7 @@
 # file: roles/galera/tasks/repos/CentOS.yml
 - name: Install MariaDB Galera repository (CentOS)
   copy:
-    src={{ ansible_files_dir }}/etc/yum.repos.d/MariaDB-centos.repo
+    src=etc/yum.repos.d/MariaDB-centos.repo
     dest=/etc/yum.repos.d/
     owner=root
     group=root
