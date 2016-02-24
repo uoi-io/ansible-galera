@@ -14,7 +14,7 @@ service galera
         server          = /usr/bin/clustercheck
         type            = UNLISTED
         per_source      = UNLIMITED
-        log_on_success += 
-        log_on_failure += HOST
+        log_on_success  = 
+        log_on_failure  = HOST
         flags           = REUSE
 }
