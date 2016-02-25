@@ -22,7 +22,7 @@ wsrep_provider={{ galera_provider }}
 wsrep_provider_options="{{ galera_provider_options | default('pc.ignore_quorum=true') }}"
 wsrep_cluster_name={{ galera_cluster_name | default('uoi-sql-cluster') }}
 wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
-{% if (inventory_hostname == master) %}
+{% if inventory_hostname == master %}
 wsrep_cluster_address=gcomm://
 {% else %}
 wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}

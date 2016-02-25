@@ -1,54 +1,37 @@
 ---
 # file: roles/galera/tasks/firewall.yml
-- name: MySQL/MariaDB firewalld rule
+- name: MySQL/MariaDB/Galera firewalld rules
   firewalld:
-    port={{ fw_mysql }}
+    port={{ item }}
     permanent=true
     state=enabled
     immediate=true
-  tags:
-    - galera
-    - galera-firewall
+  with_items:
+    - "{{ fw_galera }}/tcp"
+    - "{{ fw_galera }}/udp"
+    - "{{ fw_mysql }}/tcp"
 
 - name: IST replication firewalld rule
   firewalld:
-    port={{ fw_mysql_ist }}
+    port={{ fw_mysql_ist }}/tcp
     permanent=true
     state=enabled
     immediate=true
   when: not galera_sst_method
-  tags:
-    - galera
-    - galera-firewall
 
 - name: SST replication firewalld rule
   firewalld:
-    port={{ fw_mysql_sst }}
+    port={{ fw_mysql_sst }}/tcp
     permanent=true
     state=enabled
     immediate=true
   when: galera_sst_method
-  tags:
-    - galera
-    - galera-firewall
-
-- name: Galera firewalld rule
-  firewalld:
-    port={{ fw_galera }}
-    permanent=true
-    state=enabled
-    immediate=true
-  tags:
-    - galera
-    - galera-firewall
 
 - name: xinetd firewalld rule
   firewalld:
-    port={{ fw_xinetd }}
+    port={{ fw_xinetd }}/tcp
     permanent=true
     state=enabled
     immediate=true
-  when: galera_pacemaker_support is defined and galera_pacemaker_support == true
-  tags:
-    - galera
-    - galera-firewall
+  when: galera_pacemaker_support is defined and
+        galera_pacemaker_support == true

@@ -4,21 +4,22 @@
   copy:
     src=selinux/galera_cluster.te
     dest=/tmp/
-  tags:
-    - galera
-    - galera-selinux
 
-- command: /usr/bin/checkmodule -M -m -o galera_cluster.mod /tmp/galera_cluster.te
-  tags:
-    - galera
-    - galera-selinux
+- command:
+    /usr/bin/checkmodule -M -m -o galera_cluster.mod /tmp/galera_cluster.te
+- command:
+    /usr/bin/semodule_package -m galera_cluster.mod -o /tmp/galera_cluster.pp
+- command:
+    /usr/sbin/semodule -i /tmp/galera_cluster.pp
 
-- command: /usr/bin/semodule_package -m galera_cluster.mod -o /tmp/galera_cluster.pp
-  tags:
-    - galera
-    - galera-selinux
+- seport:
+    ports={{ mariadb_port }},{{ fw_mysql_ist }},{{ fw_mysql_sst }},{{ fw_galera }},{{ fw_xinetd }}
+    proto=tcp
+    setype=mysqld_port_t
+    state=present
 
-- command: /usr/sbin/semodule -i /tmp/galera_cluster.pp
-  tags:
-    - galera
-    - galera-selinux
+- seport:
+    ports={{ fw_galera }}
+    proto=udp
+    setype=mysqld_port_t
+    state=present

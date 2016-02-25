@@ -15,18 +15,34 @@
     - galera-pacemaker
 
 - include: reset.yml
-  when: galera_reset_cluster is defined and galera_reset_cluster == true
+  when: galera_reset_cluster is defined and
+        galera_reset_cluster == true
+  tags: [ galera, galera-reset ]
 
 - include: repos.yml
+  tags: [ galera, galera-repo ]
+
 - include: install.yml
+  tags: [ galera, galera-install ]
 
 - include: firewall.yml
-  when: galera_firewalld is defined and galera_firewalld == true
+  when: galera_firewalld is defined and
+        galera_firewalld == true
+  tags: [ galera, galera-firewall ]
 
 - include: config.yml
+  tags: [ galera, galera-config ]
+
 - include: secure.yml
+  tags: [ galera, galera-secure ]
+
 - include: user.yml
+  tags: [ galera, galera-users ]
+
 - include: bootstrap.yml
+  tags: [ galera, galera-bootstrap ]
 
 - include: pacemaker.yml
-  when: galera_pacemaker_support is defined and galera_pacemaker_support == true
+  when: galera_pacemaker_support is defined and
+        galera_pacemaker_support == true
+  tags: [ galera, galera-pacemaker ]

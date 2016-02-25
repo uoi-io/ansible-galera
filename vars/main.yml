@@ -3,8 +3,8 @@
 galera_xinet_port: 9200
 
 # FIREWALL PORTS
-fw_mysql: "{{ mariadb_port }}/tcp"
-fw_mysql_ist: 4568/tcp
-fw_mysql_sst: 4444/tcp
-fw_galera: 4567/tcp
-fw_xinetd: "{{ galera_xinet_port }}/tcp"
+fw_mysql: "{{ mariadb_port }}"
+fw_mysql_ist: 4568
+fw_mysql_sst: 4444
+fw_galera: 4567
+fw_xinetd: "{{ galera_xinet_port }}"

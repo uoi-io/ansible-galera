@@ -1,28 +1,17 @@
 ---
 # file: roles/galera/tasks/reset.yml
-- name: Stopping MariaDB service
-  service:
-    name={{ mariadb_svc_name }}
-    state=stopped
-  when: inventory_hostname == master
-  tags:
-    - galera
-    - galera-reset
+- name: Stopping/killing MariaDB service
+  shell: pkill -9 -u mysql || true
 
 - name: Purging MariaDB data directory
   file:
     path={{ mariadb_datadir }}
     state=absent
-  tags:
-    - galera
-    - galera-reset
 
 - name: Rebuilding MariaDB data
-  command: /usr/bin/mysql_install_db
-  when: master and ansible_os_family == 'RedHat'
-  tags:
-    - galera
-    - galera-reset
+  command:
+    /usr/bin/mysql_install_db
+  when: ansible_os_family == 'RedHat'
 
 - name: Restoring permissions on MariaDB data directory
   file:
@@ -30,41 +19,19 @@
     owner=mysql
     group=mysql
     recurse=yes
-  when: master and ansible_os_family == 'RedHat'
-  tags:
-    - galera
-    - galera-reset
+  when: ansible_os_family == 'RedHat'
 
 - name: Relabeling MariaDB data directory
-  command: /usr/sbin/restorecon -R {{ mariadb_datadir }}
+  command:
+    /usr/sbin/restorecon -R {{ mariadb_datadir }}
   when: ansible_os_family == 'RedHat'
-  tags:
-    - galera
-    - galera-reset
 
 - name: Deleting MariaDB config file
   file:
     path=/etc/{{ mariadb_config }}
     state=absent
-  when: inventory_hostname == master
-  tags:
-    - galera
-    - galera-reset
 
 - name: Deleting /root/.my.cnf file
   file:
     path=/root/.my.cnf
     state=absent
-  when: inventory_hostname == master
-  tags:
-    - galera
-    - galera-reset
-
-- name: Restart MariaDB service
-  service:
-    name={{ mariadb_svc_name }}
-    state=started
-  when: inventory_hostname == master
-  tags:
-    - galera
-    - galera-reset

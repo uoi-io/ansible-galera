@@ -1,4 +1,0 @@
-# file: roles/galera/handlers/stop.yml
----
-- name: Stop MariaDB
-  service: name={{ mariadb_svc_name }} state=stopped

@@ -1,40 +1,19 @@
 ---
 # file: roles/galera/tasks/install.yml
-- name: Installing MariaDB Galera packages (Debian family)
-  apt:
-    name="{{ item }}"
-    state=latest
-    update_cache=yes
-  with_items: "{{ galera_packages }}"
-  when: ansible_os_family == 'Debian'
-  tags:
-    - galera
-    - galera-install
+- yum:
+    list=mariadb-libs-5.5*x86_64
+  register: pkg
 
-- name: Remove mariadb-libs packages already installed (RedHat family)
-  yum:
+- name: Removing old mariadb-libs package (RedHat family)
+  package:
     name=mariadb-libs
     state=absent
-  when: ansible_os_family == 'RedHat'
-  tags:
-    - galera
-    - galera-install
+  when: ansible_os_family == 'RedHat' and
+        pkg.results[0].yumstate == 'installed'
 
-- name: Installing MariaDB Galera packages (RedHat family)
-  yum:
-    name="{{ item }}"
+- name: Installing MariaDB Galera packages
+  package:
+    name={{ item }}
     state=latest
-    update_cache=yes
-  with_items: "{{ galera_packages }}"
-  when: ansible_os_family == 'RedHat'
-  tags:
-    - galera
-    - galera-install
-
-- name: Enable MariaDB service
-  service:
-    name={{ mariadb_svc_name }}
-    enabled=yes
-  tags:
-    - galera
-    - galera-install
+  with_items:
+    - "{{ galera_packages }}"

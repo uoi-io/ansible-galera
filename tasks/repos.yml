@@ -2,18 +2,20 @@
 # file: roles/galera/tasks/repos.yml
 - include: repos/Debian.yml
   when: ansible_distribution == 'Debian'
-  tags:
-    - galera
-    - galera-repo
 
 - include: repos/CentOS.yml
   when: ansible_distribution == 'CentOS'
-  tags:
-    - galera
-    - galera-repo
 
 - include: repos/RedHat.yml
   when: ansible_distribution == 'RedHat'
-  tags:
-    - galera
-    - galera-repo
+
+- name: Install Percona repository (RedHat family)
+  package:
+    name={{ item }}
+    state=present
+  with_items:
+    - "{{ percona_package }}"
+- rpm_key:
+    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
+    state=present
+  when: ansible_os_family == 'RedHat'

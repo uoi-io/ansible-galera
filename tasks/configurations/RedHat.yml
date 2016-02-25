@@ -1,13 +1,11 @@
 ---
-# file: roles/galera/tasks/configurations/CentOS.yml
+# file: roles/galera/tasks/configurations/RedHat.yml
 - include: ../selinux.yml
-  when: galera_selinux is defined and galera_selinux == true
-
-- name: Start MariaDB service (RedHat family)
-  service:
-    name={{ mariadb_svc_name }}
-    state=started
-  when: inventory_hostname == master
+  when: galera_selinux is defined and
+        galera_selinux == true
+  tags:
+    - galera
+    - galera-selinux
 
 - name: Set root password for localhost (RedHat family)
   mysql_user:
@@ -21,14 +19,9 @@
   template:
     src=root/my.cnf.centos.j2
     dest=/root/.my.cnf
-    owner=root
-    group=root
     mode=0640
 
 - name: Configuring Galera cluster (RedHat family)
   template:
     src=etc/my.cnf.d/server.cnf.j2
     dest=/etc/my.cnf.d/server.cnf
-    owner=root
-    group=root
-    mode=0644

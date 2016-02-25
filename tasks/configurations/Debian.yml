@@ -1,17 +1,9 @@
 ---
 # file: roles/galera/tasks/configurations/Debian.yml
-- name: Start MariaDB service (Debian family)
-  service:
-    name={{ mariadb_svc_name }}
-    state=started
-  when: inventory_hostname == master
-
 - name: Configuring root access for Ansible (Debian family)
   file:
     src=/etc/mysql/debian.cnf
     dest=/root/.my.cnf
-    owner=root
-    group=root
     state=link
     force=yes
 
@@ -40,35 +32,25 @@
   template:
     src=root/my.cnf.debian.j2
     dest=/root/.my.cnf
-    owner=root
-    group=root
     mode=0640
 
 - name: Configuring Galera cluster (1/3) (Debian family)
   template:
     src=etc/mysql/my.cnf.j2
     dest=/etc/mysql/my.cnf
-    owner=root
-    group=root
-    mode=0644
 
 - name: Configuring Galera cluster (2/3) (Debian family)
   template:
     src=etc/mysql/conf.d/galera.cnf.j2
     dest=/etc/mysql/conf.d/galera.cnf
-    owner=root
-    group=root
-    mode=0644
 
 - name: Configuring Galera cluster (3/3) (Debian family)
   template:
     src=etc/mysql/debian.cnf.j2
     dest=/etc/mysql/debian.cnf
-    owner=root
-    group=root
     mode=0600
 
-- name: Delete mariadb.cnf config file (Debian family)
+- name: Deleting mariadb.cnf config file (Debian family)
   file:
     path=/etc/mysql/conf.d/mariadb.cnf
     state=absent
