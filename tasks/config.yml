@@ -30,3 +30,9 @@
     regexp="^mysqlchk"
     insertafter="sun-as-jpda     9191/udp"
     line="mysqlchk        {{ galera_xinet_port }}/tcp                \# Galera Clustercheck"
+
+- name: Adding galera-status script in /usr/bin/
+  copy:
+    src=usr/bin/galera-status
+    dest=/usr/bin/galera-status
+    mode=0755
