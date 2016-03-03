@@ -1,28 +1,32 @@
 # Ansible Galera (OpenStack ready)
-This module provides a support for the installation of Galera cluster.
+This module provides a support for Galera cluster setup.
 
 Two repositories will be added to the packaging system:
-- MariaDB (MariaDB, Galera)
-- Percona (xtrabackup)
+
+- MariaDB *(MariaDB, Galera)*
+- Percona *(xtrabackup)*
 
 Supported distributions:
+
 - CentOS 7.x
 - RedHat EL 7.x
 - Debian 8.x
 
 Supported functionalities:
-- Firewalld (iptables)
+
+- Firewalld *(iptables)*
 - SELinux
 - Pacemaker
 
-Pacemaker support provides clustercheck tool and the needed configuration.  
-When Pacemaker support is define, Galera cluster will be stopped at the end of the configuration.
+Pacemaker support provides ``clustercheck`` tool and the needed configuration for ``xinetd``.
+
+When Pacemaker support is define, Galera cluster will be stopped and the ``wsrep_cluster_address`` option from the MariaDB configuration will be removed to let Pacemaker decides.
 
 ## Requirements
 This module needs at least 3 nodes and Ansible 2.0.
 
 ## Role Variables
-If ``galera_reset_cluster`` is set to true, all databases will be erased.
+If ``galera_reset_cluster`` is set to true, all databases will be **erased**, be very careful !
 
 ### CONFIG
 ```
@@ -60,7 +64,7 @@ galera_slave_threads: 8
 ```
 
 ### VARIABLES
-Because the module support RedHat and Debian distributions like, we have to define some values depending of the family.
+Because the module support RedHat and Debian distributions like, we have to define some values depending of the OS family.
 ```
 ### REDHAT
 # file: roles/galera/vars/RedHat.yml
@@ -133,7 +137,7 @@ galera_cluster_nodes:
 ```
 
 ## galera-status
-When the deployment is over, Please run ``galera-status`` command to get a clear status of Galera cluster.
+When the deployment is over, please run ``galera-status`` command to get a clear status of Galera cluster.
 ```
 # galera-status
 ```
