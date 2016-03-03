@@ -27,6 +27,7 @@ If galera_reset_cluster is set to true, all databases will be erased.
 ### CONFIG
 ```
 ### MARIADB
+master: ctrl01
 mariadb_bind_address: 0.0.0.0
 mariadb_port: 3306
 mariadb_max_connections: 4096
@@ -96,6 +97,7 @@ None.
 
 ## Example Playbook
 ```
+master: node1
 mariadb_max_connections: 4096
 mariadb_maintenance_password: I3uL6AqJLHInv85x
 mariadb_root_password: 3248ew7dsYUG762
