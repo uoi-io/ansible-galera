@@ -1,15 +1,15 @@
 ---
 # file: roles/galera/tasks/install.yml
-- yum:
-    list=mariadb-libs-5.5*x86_64
+- shell:
+    rpm -aq | grep -i mariadb-libs-5.5.*x86_64 || true
   register: pkg
 
 - name: Removing old mariadb-libs package (RedHat family)
   package:
-    name=mariadb-libs
+    name="{{ pkg.stdout }}"
     state=absent
   when: ansible_os_family == 'RedHat' and
-        pkg.results[0].yumstate == 'installed'
+        pkg.stdout != ''
 
 - name: Installing MariaDB Galera packages
   package:
