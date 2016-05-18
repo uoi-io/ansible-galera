@@ -4,14 +4,14 @@ require {
 	type sysctl_net_t;
 	type kerberos_port_t;
 	type mysqld_t;
+	type rsync_exec_t;
+	type mysqld_safe_exec_t;
 	class process setpgid;
 	class tcp_socket name_bind;
 	class netlink_tcpdiag_socket create;
 	class dir search;
-	class file read;
-	class file open;
 	class unix_stream_socket connectto;
-	class file getattr;
+	class file { execute read open getattr execute_no_trans };
 }
 
 #============= mysqld_t ==============
@@ -34,3 +34,8 @@ allow mysqld_t sysctl_net_t:file open;
 allow mysqld_t self:unix_stream_socket connectto;
 
 allow mysqld_t sysctl_net_t:file getattr;
+
+#!!!! This avc is allowed in the current policy
+allow mysqld_t rsync_exec_t:file getattr;
+allow mysqld_t rsync_exec_t:file { read execute open execute_no_trans };
+allow mysqld_t mysqld_safe_exec_t:file getattr;
