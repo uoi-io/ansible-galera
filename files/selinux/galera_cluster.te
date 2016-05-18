@@ -6,13 +6,12 @@ require {
 	type mysqld_t;
 	type rsync_exec_t;
 	type mysqld_safe_exec_t;
-
 	class process setpgid;
 	class tcp_socket name_bind;
 	class netlink_tcpdiag_socket create;
 	class dir search;
 	class unix_stream_socket connectto;
-    class file { execute read open getattr execute_no_trans };
+	class file { execute read open getattr execute_no_trans };
 }
 
 #============= mysqld_t ==============
