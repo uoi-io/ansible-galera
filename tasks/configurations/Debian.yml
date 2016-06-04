@@ -1,12 +1,5 @@
 ---
 # file: roles/galera/tasks/configurations/Debian.yml
-- name: Configuring root access for Ansible (Debian family)
-  file:
-    src=/etc/mysql/debian.cnf
-    dest=/root/.my.cnf
-    state=link
-    force=yes
-
 - name: Set root password for localhost (Debian family)
   mysql_user:
     name=root
@@ -15,6 +8,12 @@
     state=present
   when: inventory_hostname == master
 
+- name: Creating the final /root/.my.cnf file (Debian family)
+  template:
+    src=root/my.cnf.debian.j2
+    dest=/root/.my.cnf
+    mode=0640
+
 - name: Set debian-sys-maint password for localhost (Debian family)
   mysql_user:
     name=debian-sys-maint
@@ -22,17 +21,6 @@
     host=localhost
     state=present
   when: inventory_hostname == master
-
-- name: Removing old /root/.my.cnf file (Debian family)
-  file:
-    path=/root/.my.cnf
-    state=absent
-
-- name: Creating the final /root/.my.cnf file (Debian family)
-  template:
-    src=root/my.cnf.debian.j2
-    dest=/root/.my.cnf
-    mode=0640
 
 - name: Configuring Galera cluster (1/3) (Debian family)
   template:
