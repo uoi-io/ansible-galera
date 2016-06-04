@@ -3,6 +3,7 @@
 - shell:
     rpm -aq | grep -i mariadb-libs-5.5.*x86_64 || true
   register: pkg
+  when: ansible_os_family == 'RedHat'
 
 - name: Removing old mariadb-libs package (RedHat family)
   package:
