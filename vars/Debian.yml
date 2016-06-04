@@ -10,3 +10,4 @@ galera_packages:
 mariadb_svc_name: mysql
 mariadb_config: mysql/conf.d/galera.cnf
 galera_provider: /usr/lib/galera/libgalera_smm.so
+sysconfig_dir: /etc/default

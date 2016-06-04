@@ -1,5 +1,5 @@
 ---
-# file: roles/galera/vars/RedHat.yml
+# file: roles/galera/vars/CentOS.yml
 galera_packages:
   - MariaDB-server
   - percona-xtrabackup

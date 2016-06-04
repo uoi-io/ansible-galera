@@ -8,10 +8,10 @@
     state=present
   when: inventory_hostname == master
 
-- name: Creating /etc/sysconfig/clustercheck file (ready for Pacemaker)
+- name: Creating /etc/(sysconfig|default)/clustercheck file (ready for Pacemaker)
   template:
     src=etc/sysconfig/clustercheck.j2
-    dest=/etc/sysconfig/clustercheck
+    dest="{{ sysconfig_dir }}/clustercheck"
 
 - name: Creating /usr/bin/clustercheck file (ready for Pacemaker)
   copy:
