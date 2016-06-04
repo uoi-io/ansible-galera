@@ -8,3 +8,13 @@
 - rpm_key:
     key=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
     state=present
+
+- name: Install Percona repository (CentOS)
+  package:
+    name={{ item }}
+    state=present
+  with_items: "{{ percona_package }}"
+
+- rpm_key:
+    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
+    state=present

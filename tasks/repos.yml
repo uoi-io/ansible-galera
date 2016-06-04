@@ -8,14 +8,3 @@
 
 - include: repos/RedHat.yml
   when: ansible_distribution == 'RedHat'
-
-- name: Install Percona repository (RedHat family)
-  package:
-    name={{ item }}
-    state=present
-  with_items:
-    - "{{ percona_package }}"
-- rpm_key:
-    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
-    state=present
-  when: ansible_os_family == 'RedHat'
