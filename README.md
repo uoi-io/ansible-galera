@@ -14,7 +14,7 @@ Supported distributions:
 
 Supported functionalities:
 
-- Firewalld *(iptables)*
+- Firewalld *(iptables and firewalld packages are needed on the server)*
 - SELinux
 - Pacemaker
 
