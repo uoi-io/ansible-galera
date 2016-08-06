@@ -10,11 +10,10 @@
     state=present
 
 - name: Install Percona repository (CentOS)
+- rpm_key:
+    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
+    state=present
   package:
     name={{ item }}
     state=present
   with_items: "{{ percona_package }}"
-
-- rpm_key:
-    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
-    state=present

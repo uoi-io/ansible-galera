@@ -20,11 +20,10 @@
     yum-config-manager --enable rhel-7-server-extras-rpms
 
 - name: Install Percona repository (RedHat)
+- rpm_key:
+    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
+    state=present
   package:
     name={{ item }}
     state=present
   with_items: "{{ percona_package }}"
-
-- rpm_key:
-    key=https://www.percona.com/downloads/RPM-GPG-KEY-percona
-    state=present
