@@ -1,61 +1,36 @@
 #
-# These groups are read by MariaDB server.
-# Use it for options that only the server (but not clients) should see
+# * mysqld-related settings
 #
-# See the examples of server my.cnf files in /usr/share/mysql/
-#
-
-# this is read by the standalone daemon and embedded servers
-[server]
-
-# this is only for the mysqld standalone daemon
 [mysqld]
 datadir=/var/lib/mysql/
+binlog_format=ROW
+default_storage_engine={{ mariadb_default_storage_engine | default('InnoDB') }}
+innodb_autoinc_lock_mode=2
+bind-address={{ mariadb_bind_address | default('127.0.0.1') }}
+query_cache_size={{ mariadb_query_cache_size | default('64M') }}
 
 #
 # * Galera-related settings
 #
-[galera]
-# Mandatory settings
+# Galera Provider Configuration
 wsrep_on=ON
 wsrep_provider={{ galera_provider }}
 wsrep_provider_options="{{ galera_provider_options | default('pc.ignore_quorum=true') }}"
-wsrep_cluster_name={{ galera_cluster_name | default('uoi-sql-cluster') }}
-wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
+
+# Galera Cluster Configuration
+wsrep_cluster_name="{{ galera_cluster_name | default('uoi-sql-cluster') }}"
 {% if inventory_hostname == master %}
-wsrep_cluster_address=gcomm://
+wsrep_cluster_address="gcomm://"
 {% else %}
-wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}
+wsrep_cluster_address="gcomm://{{ ",".join(galera_cluster_nodes) }}"
 {% endif %}
-wsrep_sst_method={{ galera_sst_method | default('rsync') }}
-wsrep_node_address="{{ galera_node_address | default('127.0.0.1') }}"
-wsrep_node_name="{{ ansible_hostname }}"
 wsrep_retry_autocommit={{ galera_retry_autocommit | default('10') }}
 wsrep_slave_threads={{ galera_slave_threads | default('8') }}
 
-binlog_format=ROW
-default_storage_engine={{ mariadb_default_storage_engine | default('InnoDB') }}
-innodb_autoinc_lock_mode=2
-innodb_doublewrite=1
-bind-address={{ mariadb_bind_address | default('127.0.0.1') }}
+# Galera Synchronization Configuration
+wsrep_sst_method={{ galera_sst_method | default('rsync') }}
+wsrep_sst_auth={{ galera_sst_user }}:{{ galera_sst_password }}
 
-query_cache_size={{ mariadb_query_cache_size | default('64M') }}
-
-#
-# Optional setting
-#wsrep_slave_threads=1
-innodb_flush_log_at_trx_commit=2
-
-# this is only for embedded server
-[embedded]
-
-# This group is only read by MariaDB servers, not by MySQL.
-# If you use the same .cnf file for MySQL and MariaDB,
-# you can put MariaDB-only options here
-[mariadb]
-
-# This group is only read by MariaDB-10.1 servers.
-# If you use the same .cnf file for MariaDB of different versions,
-# use this group for options that older servers don't understand
-[mariadb-10.1]
-
+# Galera Node Configuration
+wsrep_node_address="{{ galera_node_address | default('127.0.0.1') }}"
+wsrep_node_name="{{ ansible_hostname }}"

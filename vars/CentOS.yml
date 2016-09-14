@@ -11,7 +11,7 @@ galera_packages:
   - checkpolicy
   - xinetd
 mariadb_svc_name: mariadb
-mariadb_config: my.cnf.d/server.cnf
+mariadb_config: my.cnf.d/galera.cnf
 galera_provider: /usr/lib64/galera/libgalera_smm.so
 percona_package: https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-3.noarch.rpm
 sysconfig_dir: /etc/sysconfig

@@ -23,5 +23,5 @@
 
 - name: Configuring Galera cluster (RedHat family)
   template:
-    src=etc/my.cnf.d/server.cnf.j2
-    dest=/etc/my.cnf.d/server.cnf
+    src=etc/my.cnf.d/galera.cnf.j2
+    dest=/etc/my.cnf.d/galera.cnf
