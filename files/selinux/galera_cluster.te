@@ -1,4 +1,4 @@
-module galera_cluster 1.0;
+module galera_cluster 1.1;
 
 require {
 	type sysctl_net_t;
@@ -6,6 +6,7 @@ require {
 	type mysqld_t;
 	type rsync_exec_t;
 	type mysqld_safe_exec_t;
+        type initrc_tmp_t;
 	class process setpgid;
 	class tcp_socket name_bind;
 	class netlink_tcpdiag_socket create;
@@ -39,3 +40,5 @@ allow mysqld_t sysctl_net_t:file getattr;
 allow mysqld_t rsync_exec_t:file getattr;
 allow mysqld_t rsync_exec_t:file { read execute open execute_no_trans };
 allow mysqld_t mysqld_safe_exec_t:file getattr;
+
+allow mysqld_t initrc_tmp_t:file open;
