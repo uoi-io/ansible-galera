@@ -14,6 +14,21 @@
     - galera-install
     - galera-pacemaker
 
+- include_vars: "{{ ansible_os_family }}_packages.yml"
+  tags:
+    - galera
+    - galera-bootstrap
+    - galera-config 
+    - galera-firewall
+    - galera-repo
+    - galera-reset
+    - galera-secure
+    - galera-selinux
+    - galera-users
+    - galera-install
+    - galera-pacemaker
+  when: galera_packages | length == 0
+
 - include: reset.yml
   when: galera_reset_cluster is defined and
         galera_reset_cluster == true

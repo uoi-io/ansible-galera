@@ -1,0 +1,8 @@
+---
+galera_packages:
+  - mariadb-server
+  - xtrabackup
+  - socat
+  - python-mysqldb
+  - percona-toolkit
+  - xinetd
