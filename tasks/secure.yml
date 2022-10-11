@@ -4,7 +4,7 @@
   mysql_db:
     name: test
     state: absent
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master
 
 - name: Disabling remote access for root
   mysql_user:
@@ -14,10 +14,10 @@
     - 'localhost'
     - '127.0.0.1'
     - '::1'
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master
 
 - name: Disabling anonymous access
   mysql_user:
     name: ""
     state: absent
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master

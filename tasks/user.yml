@@ -6,4 +6,4 @@
     password={{ galera_sst_password }}
     priv=*.*:ALL,GRANT
     state=present
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master

@@ -9,7 +9,7 @@
   service:
     name={{ mariadb_svc_name }}
     state=started
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master
 
 - include: configurations/Debian.yml
   when: ansible_os_family == 'Debian'
