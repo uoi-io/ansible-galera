@@ -13,7 +13,7 @@
     password={{ mariadb_root_password }}
     host=localhost
     state=present
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master
 
 - name: Creating the /root/.my.cnf file (RedHat family)
   template:

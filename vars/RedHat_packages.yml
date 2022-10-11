@@ -1,0 +1,11 @@
+---
+galera_packages:
+  - MariaDB-server
+  - percona-xtrabackup
+  - socat
+  - MySQL-python
+  - percona-toolkit
+  - galera
+  - policycoreutils-python
+  - checkpolicy
+  - xinetd

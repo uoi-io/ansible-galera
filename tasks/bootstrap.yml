@@ -4,13 +4,13 @@
   service:
     name={{ mariadb_svc_name }}
     state=restarted
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master
 
 - name: Syncing other nodes to the master
   service:
     name={{ mariadb_svc_name }}
     state=restarted
-  when: inventory_hostname != master
+  when: inventory_hostname != galera_master
 
 - name: Set gcomm:// on the master node
   lineinfile:
@@ -18,4 +18,4 @@
     state=present
     regexp='^wsrep_cluster_address='
     line='wsrep_cluster_address=gcomm://{{ ",".join(galera_cluster_nodes) }}'
-  when: inventory_hostname == master
+  when: inventory_hostname == galera_master

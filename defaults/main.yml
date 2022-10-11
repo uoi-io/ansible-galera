@@ -27,3 +27,4 @@ galera_cluster_nodes:
 galera_provider_options: 'pc.ignore_quorum=true; gcache.size=1G'
 galera_retry_autocommit: 10
 galera_slave_threads: 8
+galera_packages: []
